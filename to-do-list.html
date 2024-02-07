@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do-List</title>
+    <link rel="stylesheet" href="to-do-list.css">
+</head>
+
+<body>
+
+    <div class="my-list">
+        <h1>Today's to-do list</h1>
+
+        <p class="center-text" id="currentDate"></p> 
+
+        <ol>
+            <li>Write a blog post</li>
+            <li>Go to the bank</li>
+            <li>Study for exams</li>
+            <li>Renew web hosting account and domain name</li>
+            <li>Learn something new</li>
+            <li>Update project log</li>
+        </ol>
+    </div>
+
+    <script>
+        const currentDateElement = document.getElementById('currentDate');
+        const options = { weekday: 'long', month: 'long', day: 'numeric' };
+        const currentDate = new Date().toLocaleDateString('en-SA', options);
+        const dateWithSuffix = currentDate.replace(/\b(\d{1,2})\b/g, (match, p1) => p1 + getNumberSuffix(parseInt(p1)));
+
+        currentDateElement.textContent = dateWithSuffix;
+
+        function getNumberSuffix(number) {
+            if (number >= 11 && number <= 13) {
+                return 'th';
+            }
+            const lastDigit = number % 10;
+            switch (lastDigit) {
+                case 1:
+                    return 'st';
+                case 2:
+                    return 'nd';
+                case 3:
+                    return 'rd';
+                default:
+                    return 'th';
+            }
+        }
+    </script>
+
+</body>
+
+</html>
